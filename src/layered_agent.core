@@ -1,0 +1,41 @@
+CAPI=2:
+name: fusesoc:examples:blinky:1.0.0
+description: Blinky, a FuseSoC example core
+
+filesets:
+  rtl:
+    files:
+      - rtl/blinky.sv
+      - rtl/macros.svh:
+          is_include_file: true
+    file_type: systemVerilogSource
+
+  tb:
+    files:
+      - tb/blinky_tb.sv
+    file_type: systemVerilogSource
+targets:
+  # The "default" target is special in FuseSoC and used in dependencies.
+  # The "&default" is a YAML anchor referenced later.
+  default: &default
+    filesets:
+      - rtl
+    toplevel: blinky
+    parameters:
+      - clk_freq_hz
+
+  # The "sim" target simulates the design. (It could have any name.)
+  sim:
+    # Copy all key/value pairs from the "default" target.
+    <<: *default
+    description: Simulate the design
+    default_tool: verilator
+    filesets_append:
+      - tb
+    toplevel: tb
+    tools:
+      verilator:
+        iverilog_options:
+          - -g2012 # Use SystemVerilog-2012
+    parameters:
+      - pulses=10
