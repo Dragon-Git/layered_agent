@@ -22,7 +22,7 @@ class base_test extends uvm_test;
     super.main_phase(phase);
     phase.raise_objection(this);
     `uvm_info(get_full_name(), "write begin", UVM_LOW)
-    // env.regmodel.ctrl_reg.write(status, 32'hFFFFFFFF);
+    env.regmodel.ctrl_reg.write(status, 32'hFFFFFFFF);
     `uvm_info(get_full_name(), "write end", UVM_LOW)
 
     phase.drop_objection(this);
