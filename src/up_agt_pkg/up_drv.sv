@@ -33,6 +33,9 @@ task up_drv::tx_driver();
       `uvm_info("TX_DRIVER", "Starting transaction...",UVM_LOW)
       seq_item_port.get_next_item(req);
       #10;
+      
+      `uvm_info("TX_DRIVER", {"trans:", req.sprint()},UVM_LOW)
+
       // case (tr.kind) 
       //    up_item::READ: begin
       //       // ToDo: Implement READ transaction

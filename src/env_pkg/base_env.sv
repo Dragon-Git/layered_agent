@@ -3,7 +3,8 @@
 class base_env extends uvm_env;
 
     up_agt m_up_agt;
-    uvm_sequencer #(uvm_reg_item, uvm_reg_item) m_reg_sqr;
+    uvm_sequencer #(uvm_reg_item) m_reg_sqr;
+    reg_adapter m_reg_adapter;
     reg_adapter_sequence ral_seq;
     empty_reg_block regmodel;
     `uvm_component_utils(base_env)
@@ -22,10 +23,11 @@ endfunction:new
 function void base_env::build_phase(uvm_phase phase);
     super.build_phase(phase);
     m_up_agt = up_agt::type_id::create("m_up_agt",this);
-    m_reg_sqr = uvm_sequencer #(uvm_reg_item, uvm_reg_item)::type_id::create("sqr", this);
+    m_reg_sqr = uvm_sequencer #(uvm_reg_item)::type_id::create("sqr", this);
     regmodel = empty_reg_block::type_id::create("regmodel",this);
     regmodel.build();
     regmodel.lock_model();
+    m_reg_adapter = reg_adapter::type_id::create("reg_adapter",this);
     ral_seq = reg_adapter_sequence::type_id::create("ral_sequence");
 
 
@@ -33,8 +35,9 @@ endfunction: build_phase
 
 function void base_env::connect_phase(uvm_phase phase);
     super.connect_phase(phase);
-    regmodel.default_map.set_sequencer(m_reg_sqr,null);
+    regmodel.default_map.set_sequencer(m_reg_sqr,m_reg_adapter);
     ral_seq.reg_seqr = m_reg_sqr;
+    // ral_seq.adapter = m_reg_adapter;
 
 endfunction: connect_phase
 

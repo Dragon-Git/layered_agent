@@ -5,6 +5,8 @@ package typical_env_pkg;
     import up_agt_pkg::*;
     import regmap_pkg::*;
 
+    `include "reg_item.sv"
+    `include "reg_adapter.sv"
     `include "reg_adapter_seq.sv"
     `include "base_env.sv"
     `include "base_test.sv"
