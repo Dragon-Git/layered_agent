@@ -6,11 +6,10 @@
 if [ ! -d /home/runner/work/verilator ]; then
     cd /home/runner/work/
     git clone https://github.com/verilator/verilator.git
-    mkdir -p /home/runner/work/verilator/build
 fi
 
-cd /home/runner/work/verilator
-cd build
+mkdir -p /home/runner/work/verilator/build
+cd /home/runner/work/verilator/build
 
 # Debug
 cmake -G Ninja .. -DCMAKE_BUILD_TYPE=Release \
