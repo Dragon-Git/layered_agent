@@ -1,4 +1,4 @@
-class reg_adapter_sequence  extends uvm_reg_sequence#();
+class reg_adapter_sequence  extends uvm_reg_sequence#(uvm_sequence #(uvm_reg_item));
 
   `uvm_object_utils(reg_adapter_sequence)
 
@@ -10,7 +10,11 @@ class reg_adapter_sequence  extends uvm_reg_sequence#();
      string rws=rw.convert2string();
     up_item tr;
     reg_item rg;
+  `ifdef VERILATOR
+    tr = up_item::type_id_create("tr"); 
+  `else
     tr = up_item::type_id::create("tr"); 
+  `endif
     $cast(rg, rw);
     if (m_sequencer == null)
      `uvm_fatal("REG/DO_ITEM/NULL","do_reg_item: m_sequencer is null") 
