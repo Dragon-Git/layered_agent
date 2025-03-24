@@ -6,6 +6,7 @@
 if [ ! -d /home/runner/work/verilator ]; then
     cd /home/runner/work/
     git clone https://github.com/verilator/verilator.git
+    mkdir -p /home/runner/work/verilator/build
 fi
 
 cd /home/runner/work/verilator
