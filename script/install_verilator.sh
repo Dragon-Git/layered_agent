@@ -13,6 +13,7 @@ cd /home/runner/work/verilator/build
 
 # Debug
 cmake -G Ninja .. -DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_CXX_COMPILER="g++" \
 -DCMAKE_CXX_STANDARD=17 \
 -DCFG_CXXFLAGS_STD="-std=gnu++17" \
 -DCFG_CXXFLAGS_STD_NEWEST="-std=gnu++17" \
