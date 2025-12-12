@@ -35,7 +35,7 @@ jobs:
         python -m pip install fusesoc -v
 
     - name: Cache verilator
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       env:
         cache-name: cache-verilator-new
       with:
