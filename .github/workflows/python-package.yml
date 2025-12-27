@@ -51,7 +51,6 @@ jobs:
       run: |
         git clone https://github.com/Dragon-Git/uvm-verilator.git
         cd uvm-verilator
-        git checkout patch
 
     - name: Lint with ruff
       uses: chartboost/ruff-action@v1

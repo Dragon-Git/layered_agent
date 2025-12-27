@@ -3,11 +3,7 @@
 class base_env extends uvm_env;
 
     up_agt m_up_agt;
-  `ifdef VERILATOR
-    uvm_sequencer #(uvm_reg_item, uvm_reg_item) m_reg_sqr;
-  `else
     uvm_sequencer #(uvm_reg_item) m_reg_sqr;
-  `endif
     reg_adapter m_reg_adapter;
     reg_adapter_sequence ral_seq;
     empty_reg_block regmodel;
@@ -27,11 +23,7 @@ endfunction:new
 function void base_env::build_phase(uvm_phase phase);
     super.build_phase(phase);
     m_up_agt = up_agt::type_id::create("m_up_agt",this);
-  `ifdef VERILATOR
-    m_reg_sqr = uvm_sequencer #(uvm_reg_item, uvm_reg_item)::type_id::create("sqr", this);
-  `else
     m_reg_sqr = uvm_sequencer #(uvm_reg_item)::type_id::create("sqr", this);
-  `endif
     regmodel = empty_reg_block::type_id::create("regmodel",this);
     regmodel.build();
     regmodel.lock_model();
